@@ -4,5 +4,7 @@
     <color name="colorPrimaryDark">#339966</color>
     <color name="colorAccent">#ff6699</color>
     <color name="background">#e6eeff</color>
+    <color name="radical_blue">#448899</color>
     <color name="black_overlay">#660033</color>
+    <color name="transparent">#00000000</color>
 </resources>
