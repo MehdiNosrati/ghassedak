@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity(), JoyStick.JoyStickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         connector = ESP8266Connector(this, "192.168.1.100", "80")
