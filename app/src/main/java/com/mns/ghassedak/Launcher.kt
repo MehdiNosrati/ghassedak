@@ -12,9 +12,4 @@ class Launcher : Activity() {
         startActivity(intent)
         finish()
     }
-
-    /*override fun onStart() {
-        super.onStart()
-
-    }*/
 }
