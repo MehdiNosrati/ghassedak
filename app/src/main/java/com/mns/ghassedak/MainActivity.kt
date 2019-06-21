@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity(), JoyStick.JoyStickListener {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         connector = ESP8266Connector(this, "192.168.1.100", "80")
         joyStick = binding.joystick
+        joyStick.type = JoyStick.TYPE_4_AXIS
         switcherX = binding.switcher
         ipText = binding.ipText
         connect = binding.connect
@@ -50,13 +51,13 @@ class MainActivity : AppCompatActivity(), JoyStick.JoyStickListener {
             lastDir = direction
             when (direction) {
                 0 -> connector.turnLeft()
-                1 -> connector.moveNW()
+                //1 -> connector.moveNW()
                 2 -> connector.moveForward()
-                3 -> connector.moveNE()
+                //3 -> connector.moveNE()
                 4 -> connector.turnRight()
-                5 -> connector.moveSE()
+                //5 -> connector.moveSE()
                 6 -> connector.moveBackward()
-                7 -> connector.moveSW()
+                //7 -> connector.moveSW()
             }
             if (power == 0.0)
                 connector.stopMoving()
