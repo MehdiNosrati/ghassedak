@@ -1,10 +1,16 @@
 package com.mns.ghassedak
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.design.widget.Snackbar
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.Toast
 import com.bitvale.switcher.SwitcherX
 import com.erz.joysticklibrary.JoyStick
 
@@ -13,9 +19,6 @@ class MainActivity : AppCompatActivity(), JoyStick.JoyStickListener {
     private lateinit var binding: com.mns.ghassedak.databinding.ActivityMainBinding
     private lateinit var joyStick: JoyStick
     private lateinit var switcherX: SwitcherX
-    private lateinit var ipText : EditText
-    private lateinit var connect : TextView
-    private val port: String = "80"
     private lateinit var connector: ESP8266Connector
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,18 +30,37 @@ class MainActivity : AppCompatActivity(), JoyStick.JoyStickListener {
         joyStick = binding.joystick
         joyStick.type = JoyStick.TYPE_4_AXIS
         switcherX = binding.switcher
-        ipText = binding.ipText
-        connect = binding.connect
         joyStick.setListener(this)
         switcherX.setOnCheckedChangeListener { connector.sendVip() }
-        connect.setOnClickListener {
-            connector = ESP8266Connector(applicationContext, ipText.text.toString(), port)
-        }
 
-        binding.sound.setOnClickListener{
+        binding.sound.setOnClickListener {
             connector.setSound()
         }
 
+        binding.scan.setOnClickListener {
+            val permission = ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            )
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 101)
+            } else{
+                val intent = Intent(this, ScanActivity::class.java)
+                startActivityForResult(intent, 0)
+            }
+        }
+
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == 101){
+            if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "اسکن انجام نشد.", Toast.LENGTH_LONG).show()
+            } else {
+                val intent = Intent(this, ScanActivity::class.java)
+                startActivityForResult(intent, 0)
+            }
+        }
     }
 
     override fun onTap() {
@@ -80,5 +102,15 @@ class MainActivity : AppCompatActivity(), JoyStick.JoyStickListener {
         connector.stopMoving()
         connector.clearRequestQueue()
         super.onPause()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (data != null) {
+            connector = ESP8266Connector(this, data.getStringExtra("ip"), "80")
+            val snackBar = Snackbar.make(binding.logo, "وصل شدید!", Snackbar.LENGTH_SHORT)
+            ViewCompat.setLayoutDirection(snackBar.view,ViewCompat.LAYOUT_DIRECTION_RTL)
+            snackBar.show()
+        }
+
     }
 }
