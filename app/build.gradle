@@ -11,8 +11,8 @@ android {
         applicationId "com.mns.ghassedak"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 19061810
-        versionName "0.0.1"
+        versionCode 19071210
+        versionName "0.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
