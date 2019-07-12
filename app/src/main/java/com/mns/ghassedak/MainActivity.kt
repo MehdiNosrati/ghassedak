@@ -107,9 +107,15 @@ class MainActivity : AppCompatActivity(), JoyStick.JoyStickListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (data != null) {
             connector = ESP8266Connector(this, data.getStringExtra("ip"), "80")
-            val snackBar = Snackbar.make(binding.logo, "وصل شدید!", Snackbar.LENGTH_SHORT)
-            ViewCompat.setLayoutDirection(snackBar.view,ViewCompat.LAYOUT_DIRECTION_RTL)
-            snackBar.show()
+            if (data.getStringExtra("ip") != ""){
+                val snackBar = Snackbar.make(binding.logo, "وصل شدید!", Snackbar.LENGTH_SHORT)
+                ViewCompat.setLayoutDirection(snackBar.view,ViewCompat.LAYOUT_DIRECTION_RTL)
+                snackBar.show()
+            } else {
+                val snackBar = Snackbar.make(binding.logo, "اتصال انجام نشد.", Snackbar.LENGTH_SHORT)
+                ViewCompat.setLayoutDirection(snackBar.view,ViewCompat.LAYOUT_DIRECTION_RTL)
+                snackBar.show()
+            }
         }
 
     }
