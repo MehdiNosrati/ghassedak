@@ -31,10 +31,21 @@
                 android:checked="false"
                 android:background="@color/transparent"
                 app:switcher_icon_color="@color/colorAccent"
-                app:layout_constraintBottom_toTopOf="@+id/bottom"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/sound"
+                app:layout_constraintLeft_toRightOf="@id/logo"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/bottom"/>
+
+        <ImageButton
+                android:id="@+id/sound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/switcher"
+                app:layout_constraintLeft_toRightOf="@id/logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:src="@drawable/ic_sound"
+        />
         <android.support.constraint.Guideline
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

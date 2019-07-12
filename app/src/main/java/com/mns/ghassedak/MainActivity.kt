@@ -35,6 +35,10 @@ class MainActivity : AppCompatActivity(), JoyStick.JoyStickListener {
             connector = ESP8266Connector(applicationContext, ipText.text.toString(), port)
         }
 
+        binding.sound.setOnClickListener{
+            connector.setSound()
+        }
+
     }
 
     override fun onTap() {

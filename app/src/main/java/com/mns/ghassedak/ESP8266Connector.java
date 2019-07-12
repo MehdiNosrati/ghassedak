@@ -60,6 +60,10 @@ public class ESP8266Connector {
         sendRequest("Vip");
     }
 
+    public void setSound(){
+        sendRequest("sound");
+    }
+
 
     private void sendRequest(String stateValue) {
         String request = this.root + "/?State=" + stateValue;
