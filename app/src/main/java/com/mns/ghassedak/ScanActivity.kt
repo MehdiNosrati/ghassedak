@@ -1,15 +1,16 @@
 package com.mns.ghassedak
 
 import android.content.Intent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.budiyev.android.codescanner.*
 import com.google.zxing.BarcodeFormat
+import com.mns.ghassedak.databinding.ActivityScanBinding
 
 class ScanActivity : AppCompatActivity() {
 
-    private lateinit var binding: com.mns.ghassedak.databinding.ActivityScanBinding
+    private lateinit var binding: ActivityScanBinding
     private lateinit var codeScanner: CodeScanner
     private var ip = ""
 
